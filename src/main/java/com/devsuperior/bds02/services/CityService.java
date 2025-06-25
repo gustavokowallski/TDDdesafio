@@ -29,4 +29,11 @@ public class CityService {
         city = repository.save(city);
         return new CityDTO(city);
     }
+
+    @Transactional(readOnly = false)
+    public void delete(Long id){
+        repository.deleteById(id);
+
+    }
+
 }
