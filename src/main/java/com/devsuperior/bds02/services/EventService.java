@@ -27,6 +27,9 @@ public class EventService {
 
     @Transactional(readOnly = false)
     public EventDTO update(Long entityId,EventDTO dto){
+        if (!repository.existsById(entityId)) {
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
         Event event = repository.getReferenceById(entityId);
         event.setName(dto.getName());
         event.setDate(dto.getDate());
